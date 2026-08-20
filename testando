@@ -1,0 +1,25 @@
+<DOCTYPE html>
+<html lang=""pt-br"
+<head>
+    <meta charset- "UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"
+    <title>portfólio</title>
+<head>
+<body>
+
+    <h1>João Pedro Souza dos Santos</h1>
+
+<title>Minhas habilidades</title>
+
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>Logica de programação</li>
+        <li>inglês tecnico</li>
+
+
+    </ul>
+
+</body>
+
+</html>
