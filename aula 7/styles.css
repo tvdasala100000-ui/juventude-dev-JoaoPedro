@@ -48,8 +48,14 @@ body {
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 8px;
+
+
+
 }
 
+git add .
+git commit -m"...""
 
+git push
 /* Garante que os links fiquem com a mesma cor do texto do cartão */
 a { color: inherit; }
