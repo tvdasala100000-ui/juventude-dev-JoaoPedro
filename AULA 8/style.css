@@ -1,0 +1,58 @@
+body {
+    background: #5d0685;
+    color: #fefdfd;
+    padding: 1.5rem;
+}
+
+.all {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.index {
+    min-height: 20vh;
+    margin-bottom: 1rem;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #2D1B69, #7C3AED);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .35);
+}
+
+.miror {
+    text-align: center;
+}
+
+.card-miror {
+    display: inline-block;
+    vertical-align: top;
+    width: 22%;
+    min-height: 14vh;
+    background: #1B1538;
+    border-radius: 14px;
+    margin: .5% 1%;
+    border: 2px solid rgba(255, 255, 255, .12);
+}
+
+.purple {
+    text-align: center;
+}
+
+.card-purple {
+    display: inline-block;
+    vertical-align: top;
+    width: 45%;
+    min-height: 35vh;
+    background: #f0f0f0;
+    border-radius: 14px;
+    margin: .5% 1%;
+    border: 2px solid rgb(192, 64, 64);
+}
+
+.purple-buble {
+    vertical-align: top;
+    width: 95%;
+    min-height: 80px;
+    background: #3300ffd9;
+    border-radius: 14px;
+    margin: 10% 1%;
+    border: 2px solid rgb(0, 0, 0);
+}
