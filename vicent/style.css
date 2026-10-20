@@ -1,0 +1,65 @@
+body {
+  background: #f5f1f1;
+  font-family: Arial;
+}
+.cartao { background: white; }
+#titulo { color: #2563eb; }
+
+
+.apresentacao {
+  color: #1e293b;
+  background: #dbeafe;
+  font-family: arial, sans-serif;
+  font-size: 18px;
+  text-align: center;
+  
+  
+}
+
+.musica {
+  color: #d82a2a;
+  background: #7c3aed;
+  font-family: georgia, serif;
+  font-size: 20px;
+  text-align: center;
+  width: 80%;
+  margin:10%;
+ box-shadow: 0 0 20px rgba(93, 93, 93, 0.2);
+ border-radius: 15px 15px 15px 15px;
+  
+}
+
+.games {
+  color: #22d3ee;
+  background: #0f172a;
+  font-family: new, sans-serif;
+  font-size: 20px;
+  text-align: center;
+  width: 80%;
+   margin:10%;
+   box-shadow: 0 0 20px rgba(93, 93, 93, 0.2);
+    border-radius: 15px 15px 15px 15px;
+  
+
+ 
+}
+
+.natureza {
+  color: #166534;
+  background: #dcfce7;
+  font-family: arial, sans-serif;
+  font-size: 20px;
+  text-align: center;
+   width: 80%;
+   margin:10%;
+      box-shadow: 0 0 20px rgba(93, 93, 93, 0.2);
+       border-radius: 15px 15px 15px 15px;
+  
+ 
+}
+p{color: #334155}
+ .destaque {background: yellow;}
+ #titulo-principal {font-size: 32px;}
+ .natureza li {color: #3a2222}
+ .games li {color: white;}
+ input[type="email"] {border-color: blue}

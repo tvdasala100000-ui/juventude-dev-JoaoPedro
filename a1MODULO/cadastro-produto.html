@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cadastro de produto</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="pagina-cadastro">
+    <main class="container py-5 area-cadastro-produto">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="card cartao-cadastro-produto">
+                    <div class="faixa-roxa" aria-hidden="true"></div>
+                    <div class="card-body p-4 p-md-5">
+                        <p class="text-uppercase small fw-semibold mb-2 texto-categoria-catalogo">Catálogo</p>
+                        <h1 class="h3 titulo-cadastro mb-2">Cadastro de produto</h1>
+                        <p class="text-secondary mb-4">Preencha os dados para adicionar um produto.</p>
+
+                        <div id="mensagem" class="alert d-none" role="status" aria-live="polite"></div>
+
+                        <form class="formulario-produto">
+                            <div class="mb-3">
+                                <label for="nome" class="form-label rotulo-campo">Nome do produto</label>
+                                <input type="text" class="form-control campo-nome-produto" id="nome" name="nome"
+                                    required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="preco" class="form-label rotulo-campo">Preço</label>
+                                <input type="number" class="form-control campo-preco-produto" id="preco" name="preco"
+                                    min="0" step="0.01" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="categoria" class="form-label rotulo-campo">Categoria</label>
+                                <select class="form-select campo-categoria-produto" id="categoria" name="categoria"
+                                    required>
+                                    <option value="" selected disabled>Selecione uma categoria</option>
+                                    <option value="eletronicos">Eletrônicos</option>
+                                    <option value="roupas">Roupas</option>
+                                    <option value="alimentos">Alimentos</option>
+                                    <option value="outros">Outros</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="descricao" class="form-label rotulo-campo">Descrição</label>
+                                <textarea class="form-control campo-descricao-produto" id="descricao" name="descricao"
+                                    rows="4" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn botao-cadastrar-produto text-white w-100 py-2">Cadastrar
+                                produto</button>
+                        </form>
+
+                        <hr class="my-4">
+                        <h2 class="h5 titulo-lista-produtos mb-3">Produtos cadastrados neste navegador</h2>
+                        <ul id="lista-produtos" class="list-group"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const chaveProdutos = "cadastro-produtos";
+        const formulario = document.querySelector(".formulario-produto");
+        const listaProdutos = document.querySelector("#lista-produtos");
+        const mensagem = document.querySelector("#mensagem");
+        let armazenamentoLocalDisponivel = true;
+        let produtosEmMemoria = [];
+        const categorias = {
+            eletronicos: "Eletrônicos",
+            roupas: "Roupas",
+            alimentos: "Alimentos",
+            outros: "Outros"
+        };
+
+        function mostrarMensagem(texto, tipo) {
+            mensagem.textContent = texto;
+            mensagem.className = `alert alert-${tipo}`;
+        }
+
+        function obterProdutos() {
+            if (!armazenamentoLocalDisponivel) return produtosEmMemoria;
+
+            try {
+                const dados = localStorage.getItem(chaveProdutos);
+                if (!dados) return [];
+
+                const produtos = JSON.parse(dados);
+                if (!Array.isArray(produtos)) {
+                    throw new Error("Os dados salvos não estão em um formato válido.");
+                }
+                return produtos;
+            } catch (erro) {
+                armazenamentoLocalDisponivel = false;
+                produtosEmMemoria = [];
+                mostrarMensagem(
+                    `O armazenamento permanente não está disponível (${erro.message}). Os produtos ficarão salvos somente enquanto esta página estiver aberta.`,
+                    "warning"
+                );
+                return produtosEmMemoria;
+            }
+        }
+
+        function salvarProdutos(produtos) {
+            if (!armazenamentoLocalDisponivel) {
+                produtosEmMemoria = produtos;
+                return false;
+            }
+
+            try {
+                localStorage.setItem(chaveProdutos, JSON.stringify(produtos));
+                return true;
+            } catch (erro) {
+                armazenamentoLocalDisponivel = false;
+                produtosEmMemoria = produtos;
+                mostrarMensagem(
+                    `Não foi possível salvar os produtos permanentemente (${erro.message}). Eles ficarão disponíveis até você fechar esta página.`,
+                    "warning"
+                );
+                return false;
+            }
+        }
+
+        function exibirProdutos(produtos) {
+            listaProdutos.replaceChildren();
+
+            if (produtos.length === 0) {
+                const item = document.createElement("li");
+                item.className = "list-group-item text-secondary";
+                item.textContent = "Nenhum produto cadastrado ainda.";
+                listaProdutos.append(item);
+                return;
+            }
+
+            produtos.forEach((produto) => {
+                const item = document.createElement("li");
+                item.className = "list-group-item";
+
+                const nome = document.createElement("strong");
+                nome.textContent = produto.nome;
+                const detalhes = document.createElement("div");
+                detalhes.className = "small text-secondary";
+                detalhes.textContent = `${categorias[produto.categoria] || produto.categoria} · ${Number(produto.preco).toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL"
+                })
+                    }`;
+                const descricao = document.createElement("p");
+                descricao.className = "mb-0 mt-1";
+                descricao.textContent = produto.descricao;
+
+                item.append(nome, detalhes, descricao);
+                listaProdutos.append(item);
+            });
+        }
+
+        exibirProdutos(obterProdutos());
+
+        formulario.addEventListener("submit", (evento) => {
+            evento.preventDefault();
+            const dados = new FormData(formulario);
+            const produto = {
+                nome: dados.get("nome").trim(),
+                preco: Number(dados.get("preco")),
+                categoria: dados.get("categoria"),
+                descricao: dados.get("descricao").trim()
+            };
+
+            const produtos = obterProdutos();
+            produtos.push(produto);
+            const salvoPermanentemente = salvarProdutos(produtos);
+            exibirProdutos(produtos);
+            formulario.reset();
+
+            if (salvoPermanentemente) {
+                mostrarMensagem("Produto cadastrado neste navegador.", "success");
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,7 +1,0 @@
- <label for ="cep">CEP</label>
-    <input type="text"
-    id="cep"
-    name="cep"
-        pattern="[0-9]{5}-[0-9]{3}"
-        title="Formato esperado:
-        00000">

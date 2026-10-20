@@ -1,0 +1,76 @@
+     /* Cores principais: altere estes valores para trocar a identidade visual. */
+        :root {
+            --roxo: #6f42c1;
+            --roxo-escuro: #56309f;
+            --roxo-claro: #a77bff;
+            --fundo-claro: #f8f6ff;
+            --fundo-roxo: #eee7ff;
+        }
+
+        /* Fundo da página */
+        .pagina-cadastro {
+            min-height: 100vh;
+            background:
+                radial-gradient(ellipse at top left, rgba(180, 151, 255, 0.28), transparent 42%),
+                linear-gradient(135deg, var(--fundo-claro), var(--fundo-roxo));
+            color: #29233a;
+        }
+
+        /* Cartão e sombra do formulário */
+        .cartao-cadastro-produto {
+            overflow: hidden;
+            border: 1px solid rgba(111, 66, 193, 0.12);
+            border-radius: 1.25rem;
+            box-shadow: 0 1.25rem 3.5rem rgba(61, 35, 105, 0.16);
+        }
+
+        .faixa-roxa {
+            height: 0.4rem;
+            background: linear-gradient(90deg, var(--roxo-escuro), var(--roxo-claro));
+        }
+
+        .titulo-cadastro,
+        .titulo-lista-produtos {
+            color: var(--roxo-escuro);
+        }
+
+        .texto-categoria-catalogo {
+            color: var(--roxo);
+        }
+
+        /* Rótulos e campos */
+        .rotulo-campo {
+            font-weight: 600;
+        }
+
+        .campo-nome-produto,
+        .campo-preco-produto,
+        .campo-categoria-produto,
+        .campo-descricao-produto {
+            border-color: #ded5ef;
+            border-radius: 0.7rem;
+            padding: 0.7rem 0.85rem;
+        }
+
+        .campo-nome-produto:focus,
+        .campo-preco-produto:focus,
+        .campo-categoria-produto:focus,
+        .campo-descricao-produto:focus {
+            border-color: #9b75e5;
+            box-shadow: 0 0 0 0.25rem rgba(111, 66, 193, 0.16);
+        }
+
+        /* Botão de envio */
+        .botao-cadastrar-produto {
+            border: 0;
+            border-radius: 0.7rem;
+            background-color: var(--roxo);
+            box-shadow: 0 0.4rem 1rem rgba(111, 66, 193, 0.25);
+            font-weight: 600;
+        }
+
+        .botao-cadastrar-produto:hover,
+        .botao-cadastrar-produto:focus {
+            background-color: var(--roxo-escuro);
+        }
+    
